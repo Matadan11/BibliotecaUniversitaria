@@ -2,13 +2,6 @@ import java.util.Scanner;
  
 public class MenuConsola {
 
-    private Alumnos _Alumnos;
-    private Profesores _Profesores;
-
-    public MenuConsola(Alumnos alumnos, Profesores profesores) {
-        _Alumnos = alumnos;
-        _Profesores = profesores;
-    }
     public static void main(String[] args) {
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
@@ -52,22 +45,65 @@ public class MenuConsola {
                         System.out.println("Nombre del profesor: ");
                         String nombre = sn.next();
 
-                        System.out.println("Edad del profesor: ");
-                        int edad = sn.nextInt();
+                        System.out.println("Apellido del profesor: ");
+                        String apellido = sn.next();
 
-                        System.out.println("Salario del profesor: ");
-                        double salario = sn.nextDouble();
-                        
-                        Profesores profesor = new Profesores(nombre, edad, salario);
-                        profesor.mostrarInformacion();
+                        System.out.println("Domicilio del profesor: ");
+                        String domicilio = sn.next();
+
+                        System.out.println("Email del profesor: ");
+                        String email = sn.next();
+
+                        System.out.println("Cedula del profesor: ");
+                        String cedula = sn.next();
+
+                        Profesores profesor = new Profesores(nombre, apellido, domicilio, email, cedula);
 
                     } else {
                         System.out.println("Opción no válida. Inténtalo de nuevo.");
                     }
-
                     break;
+
                 case 2:
-                    System.out.println("Has elegido la opción 2.");
+                    
+                    System.out.println("Ingrese el ID del estudiante:");
+                    String estudianteId = sn.nextLine();
+                    
+                    // Simulación de la verificación del estudiante
+                    // Deberías reemplazar esto con tu lógica para verificar si el estudiante existe
+                    boolean estudianteExiste = afirmacionesEstudiante(estudianteId);
+                    
+                    if (!estudianteExiste) {
+                        System.out.println("El estudiante no existe.");
+                        break;
+                    }
+                    
+                    System.out.println("Ingrese el código del curso a matricular:");
+                    String cursoCodigo = sn.nextLine();
+                    
+                    // Simulación de la verificación del curso
+                    // Deberías reemplazar esto con tu lógica para verificar si el curso existe
+                    boolean cursoExiste = verificarCurso(cursoCodigo);
+                    
+                    if (!cursoExiste) {
+                        System.out.println("El curso no existe.");
+                        break;
+                    }
+                    
+                    // Simulación de la verificación de la matrícula del estudiante en el curso
+                    // Deberías reemplazar esto con tu lógica para verificar si el estudiante ya está matriculado en el curso
+                    boolean yaMatriculado = verificarMatricula(estudianteId, cursoCodigo);
+                    
+                    if (yaMatriculado) {
+                        System.out.println("El estudiante ya está matriculado en este curso.");
+                        break;
+                    }
+                    
+                    // Simulación de la matrícula del estudiante en el curso
+                    // Deberías reemplazar esto con tu lógica para matricular al estudiante en el curso
+                    matricularEstudiante(estudianteId, cursoCodigo);
+                    
+                    System.out.println("Estudiante matriculado con éxito en el curso.");
                     break;
                 case 3:
                     salir = true;
