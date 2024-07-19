@@ -6,6 +6,12 @@ public class MenuConsola {
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion;
+        String nombre = "";
+        String apellido = "";
+        String domicilio = "";
+        String correo = "";
+        int cedula = 0;
+
 
         while (!salir) {
             System.out.println("1. Registrar un usuario");
@@ -23,41 +29,42 @@ public class MenuConsola {
                     if (cuenta == 1) {
 
                         System.out.println("Nombre del alumno: ");
-                        String nombre = sn.next();
+                        nombre = sn.next();
 
                         System.out.println("Apellido del alumno: ");
-                        String apellido = sn.next();
+                        apellido = sn.next();
 
                         System.out.println("Domicilio del alumno: ");
-                        String domicilio = sn.next();
+                        domicilio = sn.next();
 
                         System.out.println("Correo del alumno: ");
-                        String correo = sn.next();
+                        correo = sn.next();
 
                         System.out.println("Cedula del alumno: ");
-                        int cedula = sn.nextInt();
+                        cedula = sn.nextInt();
 
                         Alumnos alumno = new Alumnos(nombre, apellido, domicilio, correo, cedula);
-                        alumno.mostrarInformacion();
+                        alumno.mostrarInformacion(cedula);
 
                     } else if (cuenta == 2) {
 
                         System.out.println("Nombre del profesor: ");
-                        String nombre = sn.next();
+                        nombre = sn.next();
 
                         System.out.println("Apellido del profesor: ");
-                        String apellido = sn.next();
+                        apellido = sn.next();
 
                         System.out.println("Domicilio del profesor: ");
-                        String domicilio = sn.next();
+                        domicilio = sn.next();
 
                         System.out.println("Email del profesor: ");
-                        String email = sn.next();
+                        correo = sn.next();
 
                         System.out.println("Cedula del profesor: ");
-                        String cedula = sn.next();
+                        cedula = sn.nextInt();
 
-                        Profesores profesor = new Profesores(nombre, apellido, domicilio, email, cedula);
+                        Profesores profesor = new Profesores(nombre, apellido, domicilio, correo, cedula);
+                        profesor.mostrarInformacion(cedula);
 
                     } else {
                         System.out.println("Opción no válida. Inténtalo de nuevo.");
@@ -67,49 +74,68 @@ public class MenuConsola {
                 case 2:
                     
                     System.out.println("Ingrese el ID del estudiante:");
-                    String estudianteId = sn.nextLine();
+                    int estudianteId = sn.nextInt();
+                    Alumnos alumno = new Alumnos(nombre, apellido, domicilio, correo, estudianteId);
+                    boolean estudianteExiste = alumno.afirmacionEstudiante(estudianteId);
                     
-                    // Simulación de la verificación del estudiante
-                    // Deberías reemplazar esto con tu lógica para verificar si el estudiante existe
-                    boolean estudianteExiste = afirmacionesEstudiante(estudianteId);
-                    
+                    if (estudianteExiste) {
+                        System.out.println("Bienvenido de vuelta " + nombre);
+                        System.out.println("¿Desea matricularse en un curso?" + "\n" + "1. Si" + "\n" + "2. No");
+                        int matricular = sn.nextInt();
+                        
+                        if (matricular == 1) {
+
+                            System.out.println("Los cursos disponibles son:");
+                            System.out.println("1. Curso de Matemáticas");
+                            System.out.println("2. Curso de Física");
+                            System.out.println("3. Curso de Química");
+                            System.out.println("Ingrese el numero del curso a matricular:");
+                            int cursoCodigo = sn.nextInt();
+                            System.out.println("El alumno " + nombre + " " + apellido + " se ha matriculado en el curso " + cursoCodigo);
+
+                        } else {
+                            System.out.println("Gracias por visitarnos");
+                            break;
+                        }
+
+                        break;
+                    }
+
                     if (!estudianteExiste) {
                         System.out.println("El estudiante no existe.");
                         break;
                     }
-                    
-                    System.out.println("Ingrese el código del curso a matricular:");
-                    String cursoCodigo = sn.nextLine();
-                    
-                    // Simulación de la verificación del curso
-                    // Deberías reemplazar esto con tu lógica para verificar si el curso existe
-                    boolean cursoExiste = verificarCurso(cursoCodigo);
-                    
-                    if (!cursoExiste) {
-                        System.out.println("El curso no existe.");
-                        break;
-                    }
-                    
-                    // Simulación de la verificación de la matrícula del estudiante en el curso
-                    // Deberías reemplazar esto con tu lógica para verificar si el estudiante ya está matriculado en el curso
-                    boolean yaMatriculado = verificarMatricula(estudianteId, cursoCodigo);
-                    
-                    if (yaMatriculado) {
-                        System.out.println("El estudiante ya está matriculado en este curso.");
-                        break;
-                    }
-                    
-                    // Simulación de la matrícula del estudiante en el curso
-                    // Deberías reemplazar esto con tu lógica para matricular al estudiante en el curso
-                    matricularEstudiante(estudianteId, cursoCodigo);
-                    
                     System.out.println("Estudiante matriculado con éxito en el curso.");
                     break;
                 case 3:
+                    System.out.println("Ingrese el ID del Profesor:");
+                    int profesorId = sn.nextInt();
+                    Profesores profesor = new Profesores(nombre, apellido, domicilio, correo, profesorId);
+                    boolean profesorExiste = profesor.afirmacionProfesor(profesorId);
+
+                    if (profesorExiste) {
+                        System.out.println("Bienvenido de vuelta " + nombre);
+                        System.out.println("¿Desea ver el pago de un curso?" + "\n" + "1. Si" + "\n" + "2. No");
+                        int pago = sn.nextInt();
+                        
+                        if (pago == 1) {
+                            System.out.println("Ingrese el ID del curso:");
+                            int cursoId = sn.nextInt();
+                            System.out.println("El curso " + cursoId + " ha sido pagado.");
+                        } else {
+                            System.out.println("Gracias por visitarnos");
+                            break;
+                        }
+                        break;
+                    }
+
+                case 4:
                     salir = true;
                     break;
                 default:
                     System.out.println("Opción no válida. Inténtalo de nuevo.");
+
+                    
             }
         }
     }

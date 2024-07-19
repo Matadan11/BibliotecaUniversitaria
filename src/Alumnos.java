@@ -58,29 +58,21 @@ public class Alumnos {
     }
 
     // Método para mostrar la información del alumno
-    public void mostrarInformacion() {
-        System.out.println("El usuario ha sido registrado con éxito");
-        
-    }
-
-    public boolean afirmacionEstudiante(int cedula){
-
-        if (cedula == this.cedula){
-            return true;
+    public void mostrarInformacion(int cedulaId) {
+        if (cedulaId != this.cedula){
+            System.out.println("El usuario ha sido registrado con éxito");
         } else {
-            return false;
+            System.out.println("El usuario ya existe");
         }
     }
 
-    public String MatricularCurso(String curso){
-        
+    public boolean afirmacionEstudiante(int cedulaId){
 
-
-
-
-
-
-        return "El alumno " + this.nombre + " " + this.apellido + " se ha matriculado en el curso " + curso;
+        if (cedulaId == this.cedula){
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

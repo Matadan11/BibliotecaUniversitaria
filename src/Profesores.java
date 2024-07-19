@@ -4,9 +4,9 @@ public class Profesores {
     private String apellido;
     private String domicilio;
     private String email;
-    private String cedula;
+    private int cedula;
 
-    public Profesores(String nombre, String apellido, String domicilio, String email, String cedula) {
+    public Profesores(String nombre, String apellido, String domicilio, String email, int cedula) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
@@ -50,12 +50,28 @@ public class Profesores {
         this.email = email;
     }
 
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
     }
 
+    public void mostrarInformacion(int cedulaId) {
+        if (cedulaId != this.cedula){
+            System.out.println("El usuario ha sido registrado con éxito");
+        } else {
+            System.out.println("El usuario ya existe");
+        }
+    }
+
+    public boolean afirmacionProfesor(int cedulaId){
+
+        if (cedulaId == this.cedula){
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
